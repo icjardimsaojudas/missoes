@@ -1,0 +1,637 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Quero Servir — Base de Evangelismo</title>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@700;800;900&family=Barlow:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --navy: #1a2340;
+      --navy-mid: #243052;
+      --cream: #f0ead8;
+      --cream-dark: #e4dcc8;
+      --gold: #c8a96e;
+      --white: #ffffff;
+      --text: #1a2340;
+      --muted: #6b7080;
+      --border: #d8d0bc;
+    }
+
+    body {
+      font-family: 'Barlow', sans-serif;
+      background: var(--cream);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    /* ── HERO ── */
+    .hero {
+      width: 100%;
+      max-width: 600px;
+      background: var(--navy);
+      position: relative;
+      overflow: hidden;
+      min-height: 260px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 52px 36px 44px;
+    }
+
+    /* Globe / arrow background watermark */
+    .hero-globe {
+      position: absolute;
+      right: -30px;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 260px;
+      opacity: 0.08;
+    }
+
+    .hero-logo {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 6px;
+      margin-bottom: 24px;
+      z-index: 2;
+    }
+
+    .logo-main {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 15px;
+      font-weight: 800;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--gold);
+    }
+
+    .logo-sub {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: rgba(200,169,110,0.6);
+    }
+
+    .hero-eyebrow {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--gold);
+      z-index: 2;
+      margin-bottom: 8px;
+    }
+
+    .hero-title {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 58px;
+      font-weight: 900;
+      color: var(--cream);
+      line-height: 0.95;
+      text-align: center;
+      z-index: 2;
+      text-transform: uppercase;
+      letter-spacing: -0.01em;
+      margin-bottom: 20px;
+    }
+
+    .hero-title span {
+      color: var(--gold);
+      display: block;
+    }
+
+    .hero-divider {
+      width: 40px;
+      height: 2px;
+      background: var(--gold);
+      margin-bottom: 14px;
+      z-index: 2;
+    }
+
+    .hero-sub {
+      font-size: 13px;
+      color: rgba(240,234,216,0.65);
+      text-align: center;
+      z-index: 2;
+      line-height: 1.7;
+      font-weight: 300;
+      max-width: 280px;
+    }
+
+    /* ── FORM ── */
+    .form-wrap {
+      width: 100%;
+      max-width: 600px;
+      background: var(--white);
+      padding: 36px 32px 44px;
+      border-top: 3px solid var(--gold);
+    }
+
+    .section-label {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 11px;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--navy);
+      font-weight: 700;
+      margin-top: 28px;
+      margin-bottom: 16px;
+      padding-bottom: 8px;
+      border-bottom: 1.5px solid var(--cream-dark);
+    }
+
+    .section-label:first-child { margin-top: 0; }
+
+    .field { margin-bottom: 16px; }
+
+    .field label {
+      display: block;
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 6px;
+    }
+
+    .required-star { color: var(--gold); margin-left: 2px; }
+
+    input[type="text"],
+    input[type="tel"],
+    input[type="date"],
+    select {
+      width: 100%;
+      padding: 11px 14px;
+      border: 1.5px solid var(--border);
+      border-radius: 3px;
+      font-size: 14px;
+      font-family: 'Barlow', sans-serif;
+      color: var(--text);
+      background: #fafaf8;
+      transition: border-color 0.15s, background 0.15s;
+      appearance: none;
+      -webkit-appearance: none;
+    }
+
+    input:focus, select:focus {
+      outline: none;
+      border-color: var(--navy);
+      background: #fff;
+    }
+
+    input.invalid, select.invalid {
+      border-color: #b94040;
+      background: #fff8f8;
+    }
+
+    select {
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%231a2340' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 14px center;
+      background-color: #fafaf8;
+      padding-right: 38px;
+      cursor: pointer;
+    }
+
+    /* RADIO */
+    .radio-row { display: flex; gap: 10px; }
+    .radio-opt { flex: 1; position: relative; }
+    .radio-opt input[type="radio"] { position: absolute; opacity: 0; width: 0; height: 0; }
+
+    .radio-opt label {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 10px 12px;
+      border: 1.5px solid var(--border);
+      border-radius: 3px;
+      background: #fafaf8;
+      cursor: pointer;
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--muted);
+      letter-spacing: 0;
+      text-transform: none;
+      transition: all 0.15s;
+      margin: 0;
+    }
+
+    .radio-opt label::before {
+      content: '';
+      width: 14px; height: 14px;
+      border-radius: 50%;
+      border: 1.5px solid #ccc;
+      background: #fff;
+      flex-shrink: 0;
+      transition: all 0.15s;
+    }
+
+    .radio-opt input:checked + label {
+      border-color: var(--navy);
+      color: var(--navy);
+      background: #eef0f6;
+      font-weight: 600;
+    }
+
+    .radio-opt input:checked + label::before {
+      background: var(--navy);
+      border-color: var(--navy);
+      box-shadow: inset 0 0 0 3px #fff;
+    }
+
+    .radio-row.invalid .radio-opt label {
+      border-color: #b94040;
+      background: #fff8f8;
+    }
+
+    .campo-condicional {
+      display: none;
+      margin-top: 12px;
+      animation: slideDown 0.2s ease;
+    }
+
+    @keyframes slideDown {
+      from { opacity: 0; transform: translateY(-5px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* BUTTON */
+    .btn {
+      width: 100%;
+      padding: 15px;
+      background: var(--navy);
+      color: var(--cream);
+      border: none;
+      border-radius: 3px;
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 16px;
+      font-weight: 800;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      cursor: pointer;
+      margin-top: 28px;
+      transition: background 0.15s, transform 0.1s;
+    }
+
+    .btn:hover { background: var(--navy-mid); }
+    .btn:active { transform: scale(0.99); }
+    .btn:disabled { background: #aaa; cursor: not-allowed; }
+
+    #msg {
+      margin-top: 14px;
+      font-size: 13px;
+      text-align: center;
+      min-height: 20px;
+      font-weight: 500;
+    }
+    #msg.error { color: #b94040; }
+
+    /* THANK YOU */
+    .thank-you {
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 60vh;
+      padding: 48px 32px;
+      text-align: center;
+      animation: fadeInUp 0.5s ease;
+    }
+
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(16px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .ty-icon {
+      width: 68px; height: 68px;
+      border-radius: 50%;
+      background: var(--navy);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 24px;
+    }
+
+    .ty-icon svg { width: 30px; height: 30px; }
+
+    .thank-you h2 {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 44px;
+      font-weight: 900;
+      text-transform: uppercase;
+      color: var(--navy);
+      line-height: 1;
+      margin-bottom: 8px;
+    }
+
+    .thank-you h2 span { color: var(--gold); }
+
+    .thank-you p {
+      font-size: 14px;
+      color: var(--muted);
+      font-weight: 300;
+      line-height: 1.7;
+      max-width: 260px;
+      margin-top: 10px;
+    }
+
+    /* FOOTER */
+    .footer-bar {
+      width: 100%;
+      max-width: 600px;
+      background: var(--navy);
+      padding: 16px 32px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
+
+    .footer-bar span {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 11px;
+      color: rgba(240,234,216,0.5);
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    .footer-bar .dot { width: 3px; height: 3px; border-radius: 50%; background: var(--gold); opacity: 0.5; }
+  </style>
+</head>
+<body>
+
+  <!-- HERO -->
+  <div class="hero">
+
+    <!-- Globe watermark -->
+    <svg class="hero-globe" viewBox="0 0 260 260" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="130" cy="130" r="120" stroke="white" stroke-width="3"/>
+      <ellipse cx="130" cy="130" rx="60" ry="120" stroke="white" stroke-width="2"/>
+      <line x1="10" y1="130" x2="250" y2="130" stroke="white" stroke-width="2"/>
+      <line x1="10" y1="80" x2="250" y2="80" stroke="white" stroke-width="1.5"/>
+      <line x1="10" y1="180" x2="250" y2="180" stroke="white" stroke-width="1.5"/>
+      <!-- Arrow -->
+      <path d="M60 60 L200 130 L60 200" stroke="white" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+      <path d="M180 110 L210 130 L180 150" stroke="white" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+    </svg>
+
+    <!-- Header text -->
+    <div class="hero-logo">
+      <p class="logo-main">Igreja da Cidade — Jd. São Judas</p>
+      <p class="logo-sub">Base de Missões</p>
+    </div>
+
+    <p class="hero-eyebrow">Cadastro de Voluntário</p>
+    <h1 class="hero-title">Quero<span>Servir</span></h1>
+    <div class="hero-divider"></div>
+    <p class="hero-sub">Preencha os dados abaixo e escolha sua frente de serviço</p>
+  </div>
+
+  <!-- FORM -->
+  <div class="form-wrap">
+
+    <div class="section-label">Dados pessoais</div>
+
+    <div class="field">
+      <label>Nome completo <span class="required-star">*</span></label>
+      <input type="text" id="nome" placeholder="Seu nome completo">
+    </div>
+
+    <div class="field">
+      <label>Data de nascimento <span class="required-star">*</span></label>
+      <input type="date" id="dataNascimento">
+    </div>
+
+    <div class="field">
+      <label>WhatsApp <span class="required-star">*</span></label>
+      <input type="tel" id="whatsapp" placeholder="(12) 91234-5678" inputmode="numeric" maxlength="15" oninput="maskPhone(this)">
+    </div>
+
+    <div class="section-label">Informações ministeriais</div>
+
+    <div class="field">
+      <label>Qual frente gostaria de servir? <span class="required-star">*</span></label>
+      <select id="frente">
+        <option value="">Selecione uma frente...</option>
+        <option>Capelania Hospitalar / Prisional</option>
+        <option>Ação Social</option>
+        <option>Cidade Sports</option>
+        <option>Evangelismo</option>
+      </select>
+    </div>
+
+    <div class="field">
+      <label>É líder de GDC? <span class="required-star">*</span></label>
+      <div class="radio-row" id="radio-lider">
+        <div class="radio-opt">
+          <input type="radio" name="liderGDC" id="lider-sim" value="Sim" onchange="toggleLider()">
+          <label for="lider-sim">Sim, sou líder</label>
+        </div>
+        <div class="radio-opt">
+          <input type="radio" name="liderGDC" id="lider-nao" value="Não" onchange="toggleLider()">
+          <label for="lider-nao">Não sou líder</label>
+        </div>
+      </div>
+      <div id="campo-lider" class="campo-condicional">
+        <label style="margin-top:12px;">Nome do seu líder de GDC <span class="required-star">*</span></label>
+        <input type="text" id="nomeLiderGDC" placeholder="Nome do líder">
+      </div>
+    </div>
+
+    <div class="field">
+      <label>É membro da IC? <span class="required-star">*</span></label>
+      <div class="radio-row" id="radio-membro">
+        <div class="radio-opt">
+          <input type="radio" name="membro" id="membro-sim" value="Sim" onchange="toggleMembro()">
+          <label for="membro-sim">Sim, sou membro</label>
+        </div>
+        <div class="radio-opt">
+          <input type="radio" name="membro" id="membro-nao" value="Não" onchange="toggleMembro()">
+          <label for="membro-nao">Ainda não</label>
+        </div>
+      </div>
+      <div id="campo-neklesia" class="campo-condicional">
+        <label style="margin-top:12px;">N Eklésia <span class="required-star">*</span></label>
+        <input type="text" id="nEklesia" placeholder="Seu número Eklésia" inputmode="numeric" oninput="this.value=this.value.replace(/\D/g,'')">
+      </div>
+    </div>
+
+    <div class="field">
+      <label>É batizado(a)? <span class="required-star">*</span></label>
+      <div class="radio-row" id="radio-batizado">
+        <div class="radio-opt">
+          <input type="radio" name="batizado" id="batizado-sim" value="Sim" onchange="toggleBatismo()">
+          <label for="batizado-sim">Sim, sou batizado(a)</label>
+        </div>
+        <div class="radio-opt">
+          <input type="radio" name="batizado" id="batizado-nao" value="Não" onchange="toggleBatismo()">
+          <label for="batizado-nao">Ainda não</label>
+        </div>
+      </div>
+      <div id="campo-batismo" class="campo-condicional">
+        <label style="margin-top:12px;">Ano de batismo <span class="required-star">*</span></label>
+        <select id="anoBatismo">
+          <option value="">Selecione o ano...</option>
+        </select>
+      </div>
+    </div>
+
+    <button class="btn" id="btn-enviar" onclick="enviar()">Quero servir agora →</button>
+    <p id="msg"></p>
+
+  </div>
+
+  <!-- THANK YOU -->
+  <div class="thank-you" id="thank-you">
+    <div class="ty-icon">
+      <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M20 6L9 17l-5-5" stroke="#c8a96e" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </div>
+    <h2>Obrigado<span> pelo sim!</span></h2>
+    <p>Seu cadastro foi recebido.<br>Em breve entraremos em contato.</p>
+  </div>
+
+  <!-- FOOTER -->
+  <div class="footer-bar">
+    <span>Igreja da Cidade</span>
+    <div class="dot"></div>
+    <span>Base de Missões IC Jd São Judas 2026</span>
+  </div>
+
+  <script>
+    const URL_SCRIPT = "https://script.google.com/macros/s/AKfycbyZPp0frQl35biHPc5047CPw9TP8ou8izgopvilJjxwp-lCkDPyi_tlH2m-RZXSz2_lBA/exec";
+
+    // Ano de batismo 2026 → 1920
+    const selectAno = document.getElementById("anoBatismo");
+    for (let y = 2026; y >= 1920; y--) {
+      const opt = document.createElement("option");
+      opt.value = y; opt.textContent = y;
+      selectAno.appendChild(opt);
+    }
+
+    function maskPhone(el) {
+      let v = el.value.replace(/\D/g, '').slice(0, 11);
+      if (v.length <= 2)       v = v.replace(/^(\d{0,2})/, '($1');
+      else if (v.length <= 6)  v = v.replace(/^(\d{2})(\d{0,4})/, '($1) $2');
+      else if (v.length <= 10) v = v.replace(/^(\d{2})(\d{4})(\d{0,4})/, '($1) $2-$3');
+      else                     v = v.replace(/^(\d{2})(\d{5})(\d{0,4})/, '($1) $2-$3');
+      el.value = v;
+    }
+
+    function toggleLider() {
+      const val = document.querySelector('input[name="liderGDC"]:checked')?.value;
+      document.getElementById("campo-lider").style.display = val === "Não" ? "block" : "none";
+    }
+
+    function toggleMembro() {
+      const val = document.querySelector('input[name="membro"]:checked')?.value;
+      document.getElementById("campo-neklesia").style.display = val === "Sim" ? "block" : "none";
+    }
+
+    function toggleBatismo() {
+      const val = document.querySelector('input[name="batizado"]:checked')?.value;
+      document.getElementById("campo-batismo").style.display = val === "Sim" ? "block" : "none";
+    }
+
+    function markInvalid(el) {
+      el.classList.add("invalid");
+      el.addEventListener("change", () => el.classList.remove("invalid"), { once: true });
+      el.addEventListener("input",  () => el.classList.remove("invalid"), { once: true });
+    }
+
+    function markRadioInvalid(radioId) {
+      const el = document.getElementById(radioId);
+      el.classList.add("invalid");
+      el.querySelectorAll('input').forEach(i =>
+        i.addEventListener("change", () => el.classList.remove("invalid"), { once: true })
+      );
+    }
+
+    async function enviar() {
+      const msg = document.getElementById("msg");
+      msg.textContent = ""; msg.className = "";
+
+      const nome          = document.getElementById("nome");
+      const dataNasc      = document.getElementById("dataNascimento");
+      const whatsapp      = document.getElementById("whatsapp");
+      const frente        = document.getElementById("frente");
+      const liderChecked  = document.querySelector('input[name="liderGDC"]:checked');
+      const nomeLider     = document.getElementById("nomeLiderGDC");
+      const membroChecked = document.querySelector('input[name="membro"]:checked');
+      const nEklesia      = document.getElementById("nEklesia");
+      const batizChecked  = document.querySelector('input[name="batizado"]:checked');
+      const anoBatismo    = document.getElementById("anoBatismo");
+
+      let valid = true;
+
+      if (!nome.value.trim())    { markInvalid(nome);    valid = false; }
+      if (!dataNasc.value)       { markInvalid(dataNasc); valid = false; }
+      if (!whatsapp.value.trim()){ markInvalid(whatsapp); valid = false; }
+      if (!frente.value)         { markInvalid(frente);  valid = false; }
+
+      if (!liderChecked)         { markRadioInvalid("radio-lider");  valid = false; }
+      if (!membroChecked)        { markRadioInvalid("radio-membro"); valid = false; }
+      if (!batizChecked)         { markRadioInvalid("radio-batizado"); valid = false; }
+
+      const liderVal  = liderChecked?.value;
+      const membroVal = membroChecked?.value;
+      const batizVal  = batizChecked?.value;
+
+      if (liderVal === "Não" && !nomeLider.value.trim()) { markInvalid(nomeLider); valid = false; }
+      if (membroVal === "Sim" && !nEklesia.value.trim()) { markInvalid(nEklesia); valid = false; }
+      if (batizVal === "Sim" && !anoBatismo.value)       { markInvalid(anoBatismo); valid = false; }
+
+      if (!valid) {
+        msg.textContent = "⚠️ Preencha todos os campos obrigatórios.";
+        msg.className = "error";
+        return;
+      }
+
+      const btn = document.getElementById("btn-enviar");
+      btn.disabled = true;
+      btn.textContent = "Enviando...";
+
+      const dados = {
+        dataPreenchimento: new Date().toLocaleString("pt-BR"),
+        nome:          nome.value.trim(),
+        dataNascimento: dataNasc.value,
+        whatsapp:      whatsapp.value.trim(),
+        frente:        frente.value,
+        liderGDC:      liderVal,
+        nomeLiderGDC:  liderVal === "Não" ? nomeLider.value.trim() : "",
+        membro:        membroVal,
+        nEklesia:      membroVal === "Sim" ? nEklesia.value.trim() : "",
+        batizado:      batizVal,
+        anoBatismo:    batizVal === "Sim" ? anoBatismo.value : ""
+      };
+
+      try {
+        await fetch(URL_SCRIPT, { method: "POST", body: JSON.stringify(dados) });
+
+        document.querySelector('.hero').style.display = 'none';
+        document.querySelector('.form-wrap').style.display = 'none';
+        document.getElementById("thank-you").style.display = 'flex';
+
+      } catch (err) {
+        msg.textContent = "❌ Erro ao enviar. Verifique sua conexão e tente novamente.";
+        msg.className = "error";
+        btn.disabled = false;
+        btn.textContent = "Quero servir agora →";
+      }
+    }
+  </script>
+</body>
+</html>
